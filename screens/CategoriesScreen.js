@@ -12,31 +12,42 @@ import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 import CategoryGridTile from '../components/CategoryGridTile';
 
-const CategoriesScreen = props => {
+
+
+
+
+const CategoriesScreen = (props,navigation) => {
+
+  
   const renderGridItem = itemData => {
     return (
+      
       <CategoryGridTile
       title={itemData.item.title}
       color={itemData.item.color}
       onSelect={() => {
-        props.navigation.navigate(
-           'CategoryMeals',
-           {
-            categoryId: itemData.item.id
-          }
-        );
-      }}
+        props.navigation.navigate( 'CategoryMeals', {catId:itemData.item.id})
+        
+         }
+       
+      }
+      
+      
     />
+
+    
     );
   };
 
   return (
+    
     <FlatList
       keyExtractor={(item, index) => item.id}
       data={CATEGORIES}
       renderItem={renderGridItem}
       numColumns={2}
     />
+     
   );
 };
 

@@ -1,31 +1,42 @@
-import { createStackNavigator, createAppContainer } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Platform } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import Colors from '../constants/Colors';
-import { CATEGORIES } from '../data/dummy-data';
+import FavoritesScreen from '../screens/FavoritesScreen';
+
 
 const Stack = createStackNavigator()
-
-
+const Tab = createBottomTabNavigator()
  
 function Mystack(){
   return(
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      },
+      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+     
+    }}>
       <Stack.Screen
       name = 'Categories'
       component = {CategoriesScreen}
       options={{ headerTitle: 'Meal Categories',
-      headerStyle: { backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '' },
-      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor }}
+    }}
+      
+  
       />
       <Stack.Screen
       name = 'CategoryMeals'
       component = {CategoryMealsScreen}
-      options={{ title: 'Category Meals' }}
+      options={{ title: 'Category Meals' 
+      
+      }}
       />
       <Stack.Screen
       name = 'MealDetail'
@@ -33,14 +44,36 @@ function Mystack(){
       options = {{ title: 'Meals Detail'}}
       />
       
+      <Tab.Navigator />
+     
+     
     </Stack.Navigator>
+
+      
   )
 }
 
-export default function MealsNavigator()
-{
+
+         <Tab.Navigator>
+           <Tab.Screen
+            name = 'Categories'
+            component = {CategoriesScreen}
+            options={{ headerTitle: ' Categories',
+            }}
+            
+            />
+            <Tab.Screen
+            name = 'favoritesScreen'
+            component = {FavoritesScreen}
+            options={{ title: 'Favorites' 
+            
+            }}
+            />
+         </Tab.Navigator>
   
 
+export default function MealsNavigator()
+{
 
   return(
       <NavigationContainer>
