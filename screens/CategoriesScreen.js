@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import {
   View,
   Text,
@@ -16,8 +16,10 @@ import CategoryGridTile from '../components/CategoryGridTile';
 
 
 
-const CategoriesScreen = (props,navigation) => {
 
+const CategoriesScreen = (props,navigation) => {
+  
+ 
   
   const renderGridItem = itemData => {
     return (
@@ -40,14 +42,14 @@ const CategoriesScreen = (props,navigation) => {
   };
 
   return (
-    
+   
     <FlatList
       keyExtractor={(item, index) => item.id}
       data={CATEGORIES}
       renderItem={renderGridItem}
       numColumns={2}
     />
-     
+    
   );
 };
 

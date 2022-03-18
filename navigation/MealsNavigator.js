@@ -2,16 +2,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Button } from 'react-native';
+
+
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import FiltersScreen from '../screens/FiltersScreen';
 
 
-const Stack = createStackNavigator()
-const Tab = createBottomTabNavigator()
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
  
 function Mystack(){
   return(
@@ -22,44 +29,41 @@ function Mystack(){
       },
       headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
      
-    }}>
+       }}>
+       
       <Stack.Screen
       name = 'Categories'
       component = {CategoriesScreen}
-      options={{ headerTitle: 'Meal Categories',
-    }}
-      
-  
+      options={{ headerTitle: 'Meal Categories',headerLeft: () => (
+                 <Button
+                   onPress={() => alert('This is a button!')}
+                   title="menu"
+                   color="green"   />
+      ),}}
       />
       <Stack.Screen
       name = 'CategoryMeals'
       component = {CategoryMealsScreen}
-      options={{ title: 'Category Meals' 
-      
-      }}
+      options={{ title: 'Category Meals' }}
       />
       <Stack.Screen
       name = 'MealDetail'
       component = {MealDetailScreen}
       options = {{ title: 'Meals Detail'}}
       />
-      
-      <Tab.Navigator />
-     
-     
     </Stack.Navigator>
 
       
   )
 }
+   const  MyTab = () => {
+     return(
 
-
-         <Tab.Navigator>
+         <Tab.Navigator >
            <Tab.Screen
-            name = 'Categories'
-            component = {CategoriesScreen}
-            options={{ headerTitle: ' Categories',
-            }}
+            name = 'CategorieScreen'
+            component = {Mystack}
+            options = {{ headerShown : false }}
             
             />
             <Tab.Screen
@@ -69,15 +73,19 @@ function Mystack(){
             
             }}
             />
-         </Tab.Navigator>
-  
+             </Tab.Navigator>
+
+     )
+          }
+
+      
 
 export default function MealsNavigator()
 {
 
   return(
       <NavigationContainer>
-         <Mystack/> 
+         <MyTab/> 
       </NavigationContainer>
   );
 }

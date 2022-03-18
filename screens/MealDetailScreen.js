@@ -1,17 +1,25 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const MealDetailScreen = props => {
+import { MEALS } from '../data/dummy-data';
+
+const MealDetailScreen = (props,{route}) => {
+
+  const {mealId} = route.params;
+  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+
   return (
     <View style={styles.screen}>
-      <Text>The Meal Detail Screen!</Text>
-      <Button title="Go Back to Categories" onPress={() => {
+      <Text>{selectedMeal.title}</Text>
+      <Button
+        title="Go Back to Categories"
+        onPress={() => {
           props.navigation.popToTop();
-      }} />
+        }}
+      />
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

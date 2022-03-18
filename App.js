@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
